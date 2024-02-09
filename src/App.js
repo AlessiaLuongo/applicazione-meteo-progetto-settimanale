@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
+import ComponentNavbar from "./components/ComponentNavbar";
+import ComponentMain from "./components/ComponentMain";
+import ComponentSearchBar from "./components/ComponentSearchBar";
+import { useState } from "react";
 
 function App() {
+  const [city, setCity] = useState("");
+  const [countryCode, setCountryCode] = useState("");
+
+  const handleSearchSubmit = (city, countryCode) => {
+    setCity(city);
+    setCountryCode(countryCode);
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header>
+        <ComponentNavbar />
       </header>
+      <main>
+        <ComponentSearchBar onSubmit={handleSearchSubmit} />
+        <ComponentMain city={city} countryCode={countryCode} />
+      </main>
+      <footer></footer>
     </div>
   );
 }
