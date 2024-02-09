@@ -37,7 +37,12 @@ function App() {
             />
           </Routes>
           <Routes>
-            <Route element={<ComponentDetail />} path="detail" />
+            <Route
+              element={
+                <ComponentDetail city={city} countryCode={countryCode} />
+              }
+              path="/detail"
+            />
           </Routes>
         </main>
 

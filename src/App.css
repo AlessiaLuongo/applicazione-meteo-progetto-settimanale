@@ -31,6 +31,7 @@
   opacity: 0.5;
 }
 .card-body p {
+  color: black;
   z-index: 1;
   font-size: calc(10px + 2vmin);
   color: rgb(255, 255, 255);
