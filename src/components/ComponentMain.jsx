@@ -3,10 +3,12 @@ import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import { useState, useEffect } from "react";
+import Button from "react-bootstrap/Button";
+import { useNavigate } from "react-router-dom";
 
 const ComponentMain = ({ city, countryCode }) => {
   const [weather, setWeather] = useState(null);
-
+  const navigate = useNavigate();
   const fetchWeather = async () => {
     try {
       const response = await fetch(
@@ -25,27 +27,28 @@ const ComponentMain = ({ city, countryCode }) => {
 
   useEffect(() => {
     fetchWeather();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [city, countryCode]);
 
   return (
     weather && (
       <Container>
-        <Row>
-          <Col>
-            <Card>
+        <Row className="justify-content-center">
+          <Col xs={12} md={10} lg={6}>
+            <Card className="card-bg">
               <Card.Body>
-                <Card.Title>
-                  {weather.name} - {weather.sys.country}
+                <Card.Title className="card-body">
+                  <p>
+                    {weather.name} - {weather.sys.country}
+                  </p>
                 </Card.Title>
-                <Card.Subtitle className="mb-2 text-muted"></Card.Subtitle>
 
                 {weather.weather.map((e) => {
-                  return (
-                    <Card.Text key={e.id}>
-                      {e.main} - {e.description}
-                    </Card.Text>
-                  );
+                  return <Card.Text key={e.id}>{e.main}</Card.Text>;
                 })}
+                <Button variant="light" onClick={() => navigate("/detail")}>
+                  More infos
+                </Button>
               </Card.Body>
             </Card>
           </Col>
